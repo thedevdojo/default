@@ -45,8 +45,8 @@
     --ring: #a1a1a1;
 
     --radius-small: 0.5rem;
-    --radius-medium: 1rem;
-    --radius-large: 1.5rem;
+    --radius-medium: 0.75rem;
+    --radius-large: 1.25rem;
 }
 
 .dark {
