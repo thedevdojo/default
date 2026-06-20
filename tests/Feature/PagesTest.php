@@ -5,7 +5,7 @@ use App\Models\User;
 test('the home page renders the hero', function () {
     $this->get('/')
         ->assertOk()
-        ->assertSee('Build something great, faster.');
+        ->assertSee('Build something great, even faster.');
 });
 
 test('the dashboard redirects guests to login', function () {
