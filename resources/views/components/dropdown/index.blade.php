@@ -2,6 +2,7 @@
     'position' => 'bottom',
     'align' => 'left',
     'gap' => '2',
+    'animate' => true,
 ])
 
 <div x-data="{
@@ -34,14 +35,12 @@
         let left = this.triggerPosition.left;
         let transformX = '';
         let transformY = '';
-        let transformOrigin = 'top left';
 
         if ('{{ $position }}' === 'bottom') {
             top += this.triggerPosition.height + {{ (int) $gap * 4 }};
         } else if ('{{ $position }}' === 'top') {
             top -= {{ (int) $gap * 4 }};
             transformY = 'translateY(-100%)';
-            transformOrigin = 'bottom left';
         } else if ('{{ $position }}' === 'right') {
             left += this.triggerPosition.width + {{ (int) $gap * 4 }};
         } else if ('{{ $position }}' === 'left') {
@@ -68,9 +67,24 @@
             top: top + 'px',
             left: left + 'px',
             transform: [transformX, transformY].filter(t => t).join(' '),
-            transformOrigin: transformOrigin,
+            transformOrigin: this.getTransformOrigin(),
             zIndex: 50
         };
+    },
+
+    {{-- Scale-from-corner origin: the menu grows out of the corner nearest the
+         trigger (e.g. top-right for a right-aligned menu, top-left for left). --}}
+    getTransformOrigin() {
+        let originY = '{{ $position }}' === 'top' ? 'bottom' : 'top';
+        let originX = '{{ $position }}' === 'left' ? 'right' : 'left';
+
+        if ('{{ $position }}' === 'top' || '{{ $position }}' === 'bottom') {
+            originX = '{{ $align }}' === 'right' ? 'right' : ('{{ $align }}' === 'center' ? 'center' : 'left');
+        } else {
+            originY = '{{ $align }}' === 'bottom' ? 'bottom' : ('{{ $align }}' === 'center' ? 'center' : 'top');
+        }
+
+        return originY + ' ' + originX;
     },
 
     openDropdown() {
@@ -101,12 +115,21 @@
         <div x-show="dropdownOpen"
             x-on:click.away="dropdownOpen = false"
             x-on:keydown.escape.window="dropdownOpen = false"
-            x-transition:enter="ease-out duration-200"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="ease-in duration-150"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
+            @if ($animate)
+                x-transition:enter="transition ease-[cubic-bezier(0.16,1,0.3,1)] duration-200"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+            @else
+                x-transition:enter="transition ease-out duration-150"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-100"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+            @endif
             :style="getDropdownStyles()"
             x-cloak
             class="w-max">
