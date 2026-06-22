@@ -7,7 +7,7 @@
         Create your first project. Connect your DigitalOcean account and it'll be live in under 2 minutes.
     </p>
 
-    <x-elements.button href="#" class="mt-6">
+    <x-button type="a" href="#" size="xl" class="mt-6 font-semibold">
         Create Your First Project
-    </x-elements.button>
+    </x-button>
 </div>

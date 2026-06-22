@@ -23,18 +23,48 @@
                 <x-logo />
             </a>
 
+            {{-- Center nav links --}}
+            <nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex" aria-label="Primary">
+                @foreach (['Home' => '#top', 'Features' => '#features', 'About' => '#about'] as $label => $href)
+                    <a href="{{ $href }}" class="text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">{{ $label }}</a>
+                @endforeach
+            </nav>
+
             <div class="flex items-center gap-2.5">
                 <x-theme-toggle />
                 @guest
-                    <a href="{{ route('register') }}" class="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-neutral-800 active:scale-[0.98] dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+                    <x-button type="a" :href="route('register')" size="lg" class="hidden font-semibold sm:inline-flex">
                         Get started
-                    </a>
+                    </x-button>
                 @else
-                    <a href="{{ route('dashboard') }}" class="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-neutral-800 active:scale-[0.98] dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+                    <x-button type="a" :href="route('dashboard')" size="lg" class="hidden font-semibold sm:inline-flex">
                         Dashboard
-                    </a>
+                    </x-button>
                 @endguest
+
+                {{-- Mobile menu toggle --}}
+                <button type="button" data-nav-toggle aria-label="Toggle menu" aria-expanded="false" class="flex size-9 items-center justify-center rounded-xl border border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-50 md:hidden dark:border-white/10 dark:text-neutral-300 dark:hover:bg-white/[0.06]">
+                    <svg class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
+                </button>
             </div>
+        </div>
+
+        {{-- Mobile menu --}}
+        <div data-nav-menu hidden class="border-t border-neutral-200 bg-white/95 backdrop-blur-xl md:hidden dark:border-white/10 dark:bg-[#0c0c0c]/95">
+            <nav class="mx-auto flex max-w-6xl flex-col px-6 py-3" aria-label="Mobile">
+                @foreach (['Home' => '#top', 'Features' => '#features', 'About' => '#about'] as $label => $href)
+                    <a href="{{ $href }}" data-nav-link class="border-b border-neutral-200/70 py-3 text-sm text-neutral-700 last:border-0 dark:border-white/5 dark:text-neutral-300">{{ $label }}</a>
+                @endforeach
+                @guest
+                    <x-button type="a" :href="route('register')" size="lg" class="mt-3 w-full justify-center font-semibold">
+                        Get started
+                    </x-button>
+                @else
+                    <x-button type="a" :href="route('dashboard')" size="lg" class="mt-3 w-full justify-center font-semibold">
+                        Dashboard
+                    </x-button>
+                @endguest
+            </nav>
         </div>
     </header>
 
@@ -42,12 +72,38 @@
         {{ $slot }}
     </main>
 
-    <footer class="border-t border-black/5 dark:border-white/5">
-        <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-neutral-500 sm:flex-row dark:text-neutral-400">
-            <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
-            <div class="flex items-center gap-6">
-                <a href="#" class="transition-colors hover:text-neutral-900 dark:hover:text-white">Privacy</a>
-                <a href="#" class="transition-colors hover:text-neutral-900 dark:hover:text-white">Terms</a>
+    <footer class="border-t border-neutral-200 py-14 dark:border-white/[0.07]">
+        <div class="mx-auto max-w-6xl px-6">
+            <div class="flex flex-col gap-12 lg:flex-row lg:justify-between">
+                <div class="max-w-xs">
+                    <a href="{{ route('home') }}" aria-label="{{ config('app.name') }} home" class="flex">
+                        <x-logo />
+                    </a>
+                    <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">A clean, modern starting point for whatever you're building. Authentication, billing, and accounts — ready to go.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-10 sm:grid-cols-3">
+                    @php $cols = [
+                        'Navigation' => ['Home' => '#top', 'Features' => '#features', 'About' => '#about'],
+                        'Product' => ['Dashboard' => route('dashboard'), 'Sign in' => route('login'), 'Get started' => route('register')],
+                        'Legal' => ['Privacy' => '#', 'Terms' => '#', 'Contact' => '#'],
+                    ]; @endphp
+                    @foreach ($cols as $heading => $links)
+                        <div>
+                            <p class="text-xs font-semibold tracking-wide text-neutral-500 uppercase dark:text-neutral-400">{{ $heading }}</p>
+                            <ul role="list" class="mt-4 space-y-2.5">
+                                @foreach ($links as $label => $href)
+                                    <li><a href="{{ $href }}" class="text-sm text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">{{ $label }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-neutral-200 pt-6 sm:flex-row dark:border-white/[0.07]">
+                <p class="text-xs text-neutral-400 dark:text-neutral-600">&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+                <p class="font-mono text-xs text-neutral-400 dark:text-neutral-600">Built for builders who ship.</p>
             </div>
         </div>
     </footer>
@@ -66,6 +122,23 @@
             requestAnimationFrame(function () {
                 nav.classList.add('nav-ready');
             });
+
+            var toggle = nav.querySelector('[data-nav-toggle]');
+            var menu = nav.querySelector('[data-nav-menu]');
+            if (toggle && menu) {
+                var setOpen = function (open) {
+                    menu.toggleAttribute('hidden', ! open);
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                };
+                toggle.addEventListener('click', function () {
+                    setOpen(menu.hasAttribute('hidden'));
+                });
+                menu.querySelectorAll('[data-nav-link]').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        setOpen(false);
+                    });
+                });
+            }
         })();
     </script>
 </body>
