@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "956da858e030678eef257f8df90d7ea1",
+    "content-hash": "6fc9fda1d23423b1f093fab95237ac99",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -144,16 +144,16 @@
         },
         {
             "name": "brick/math",
-            "version": "0.17.2",
+            "version": "0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "8189e751995f9e15729c1aa2f89fa8f166ffe818"
+                "reference": "82944324d1c1bdb2c2618e89978d4e2ad78d69ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/8189e751995f9e15729c1aa2f89fa8f166ffe818",
-                "reference": "8189e751995f9e15729c1aa2f89fa8f166ffe818",
+                "url": "https://api.github.com/repos/brick/math/zipball/82944324d1c1bdb2c2618e89978d4e2ad78d69ad",
+                "reference": "82944324d1c1bdb2c2618e89978d4e2ad78d69ad",
                 "shasum": ""
             },
             "require": {
@@ -191,7 +191,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.17.2"
+                "source": "https://github.com/brick/math/tree/0.18.0"
             },
             "funding": [
                 {
@@ -199,7 +199,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-25T20:34:43+00:00"
+            "time": "2026-06-14T18:21:03+00:00"
         },
         {
             "name": "calebporzio/sushi",
@@ -447,11 +447,17 @@
         },
         {
             "name": "devdojo/accounts",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/accounts",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/accounts.git",
                 "reference": "de22bcf807a0a5c2fa4a7f729293ce54f98f50e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/accounts/zipball/de22bcf807a0a5c2fa4a7f729293ce54f98f50e0",
+                "reference": "de22bcf807a0a5c2fa4a7f729293ce54f98f50e0",
+                "shasum": ""
             },
             "require": {
                 "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
@@ -471,6 +477,7 @@
                 "devdojo/billing": "Unlocks the Billing tab (current plan, invoices, customer portal).",
                 "filament/filament": "Required for the HasDynamicFields trait (renders profile fields as Filament form components)."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -518,18 +525,25 @@
                 "tall-stack",
                 "user-profile"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/accounts/tree/main",
+                "issues": "https://github.com/thedevdojo/accounts/issues"
+            },
+            "time": "2026-06-12T17:30:57+00:00"
         },
         {
             "name": "devdojo/auth",
             "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/auth",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/auth.git",
                 "reference": "7cefba29499b746dbc8dd4bafacce451b24c3351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/auth/zipball/7cefba29499b746dbc8dd4bafacce451b24c3351",
+                "reference": "7cefba29499b746dbc8dd4bafacce451b24c3351",
+                "shasum": ""
             },
             "require": {
                 "bacon/bacon-qr-code": "^3.0",
@@ -555,6 +569,7 @@
                 "phpstan/phpstan": "^1.11",
                 "protonemedia/laravel-dusk-fakes": "^1.6"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -601,18 +616,24 @@
                 "auth",
                 "devdojo"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/auth/tree/main"
+            },
+            "time": "2026-06-17T00:32:50+00:00"
         },
         {
             "name": "devdojo/billing",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/billing",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/billing.git",
                 "reference": "c9e73602adeeb1fb762bbc2011af1f5e28299472"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/billing/zipball/c9e73602adeeb1fb762bbc2011af1f5e28299472",
+                "reference": "c9e73602adeeb1fb762bbc2011af1f5e28299472",
+                "shasum": ""
             },
             "require": {
                 "codeat3/blade-phosphor-icons": "^2.0",
@@ -636,6 +657,7 @@
             "suggest": {
                 "filament/filament": "Required to use the bundled Plan admin resource (BillingPlugin)."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -680,18 +702,25 @@
                 "stripe",
                 "subscriptions"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/billing/tree/main",
+                "issues": "https://github.com/thedevdojo/billing/issues"
+            },
+            "time": "2026-06-12T14:58:53+00:00"
         },
         {
             "name": "devdojo/blog",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/blog",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/blog.git",
                 "reference": "f1e9e7939e594bd411ff67ed8614f06e0fc2dcae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/blog/zipball/f1e9e7939e594bd411ff67ed8614f06e0fc2dcae",
+                "reference": "f1e9e7939e594bd411ff67ed8614f06e0fc2dcae",
+                "shasum": ""
             },
             "require": {
                 "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
@@ -701,6 +730,7 @@
             "suggest": {
                 "filament/filament": "Required to use the bundled Post & Category admin resources (BlogPlugin)."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -731,18 +761,25 @@
                 "devdojo",
                 "laravel"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/blog/tree/main",
+                "issues": "https://github.com/thedevdojo/blog/issues"
+            },
+            "time": "2026-06-19T01:59:12+00:00"
         },
         {
             "name": "devdojo/changelog",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/changelog",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/changelog.git",
                 "reference": "f9d6a52cec00d8595cd68fa141315599aebe86a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/changelog/zipball/f9d6a52cec00d8595cd68fa141315599aebe86a5",
+                "reference": "f9d6a52cec00d8595cd68fa141315599aebe86a5",
+                "shasum": ""
             },
             "require": {
                 "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
@@ -752,6 +789,7 @@
             "suggest": {
                 "filament/filament": "Required to use the bundled Changelog admin resource (ChangelogPlugin)."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -782,18 +820,25 @@
                 "devdojo",
                 "laravel"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/changelog/tree/main",
+                "issues": "https://github.com/thedevdojo/changelog/issues"
+            },
+            "time": "2026-06-19T02:03:43+00:00"
         },
         {
             "name": "devdojo/components",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/components.git",
+                "reference": "70d630eeb69b12cef67a3587566e849cc30b4e37"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/devdojo/components",
-                "reference": "cf1505b38d3a9324271cab3e59cadbaa40cc5dea"
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/components/zipball/70d630eeb69b12cef67a3587566e849cc30b4e37",
+                "reference": "70d630eeb69b12cef67a3587566e849cc30b4e37",
+                "shasum": ""
             },
             "require": {
                 "gehrisandro/tailwind-merge-laravel": "^1.2",
@@ -807,6 +852,7 @@
                 "orchestra/testbench": "^9.0|^10.0",
                 "pestphp/pest": "^2.0|^3.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -851,10 +897,11 @@
                 "tailwindcss",
                 "ui"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/components/tree/main",
+                "issues": "https://github.com/thedevdojo/components/issues"
+            },
+            "time": "2026-06-21T00:02:29+00:00"
         },
         {
             "name": "devdojo/config-writer",
@@ -922,11 +969,17 @@
         },
         {
             "name": "devdojo/foundation",
-            "version": "0.0.1",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/foundation.git",
+                "reference": "ffd2c9cd555eb0d8fdb8babe02a10dc27255d2ce"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/devdojo/foundation",
-                "reference": "16024e5898463cff9b689a0149bc0cc497dd646e"
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/foundation/zipball/ffd2c9cd555eb0d8fdb8babe02a10dc27255d2ce",
+                "reference": "ffd2c9cd555eb0d8fdb8babe02a10dc27255d2ce",
+                "shasum": ""
             },
             "require": {
                 "devdojo/accounts": "*",
@@ -940,6 +993,7 @@
                 "laravel/framework": "^11.0|^12.0|^13.0",
                 "php": "^8.2|^8.3|^8.4"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -971,24 +1025,32 @@
                 "laravel",
                 "saas"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/foundation/tree/main",
+                "issues": "https://github.com/thedevdojo/foundation/issues"
+            },
+            "time": "2026-06-19T18:16:10+00:00"
         },
         {
             "name": "devdojo/notifications",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/notifications",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/notifications.git",
                 "reference": "0f7d3fdb4755ede7a672650171d21d435c2c23f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/notifications/zipball/0f7d3fdb4755ede7a672650171d21d435c2c23f1",
+                "reference": "0f7d3fdb4755ede7a672650171d21d435c2c23f1",
+                "shasum": ""
             },
             "require": {
                 "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
                 "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
                 "php": "^8.2|^8.3|^8.4"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1019,18 +1081,25 @@
                 "laravel",
                 "notifications"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/notifications/tree/main",
+                "issues": "https://github.com/thedevdojo/notifications/issues"
+            },
+            "time": "2026-06-12T15:01:52+00:00"
         },
         {
             "name": "devdojo/teams",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "packages/devdojo/teams",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thedevdojo/teams.git",
                 "reference": "da350738613552b6b894210bde919b7d7fbdceec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thedevdojo/teams/zipball/da350738613552b6b894210bde919b7d7fbdceec",
+                "reference": "da350738613552b6b894210bde919b7d7fbdceec",
+                "shasum": ""
             },
             "require": {
                 "laravel/folio": "^1.0",
@@ -1039,6 +1108,7 @@
                 "livewire/volt": "^1.0",
                 "php": "^8.2|^8.3|^8.4"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1075,10 +1145,11 @@
                 "teams",
                 "volt"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/thedevdojo/teams/tree/main",
+                "issues": "https://github.com/thedevdojo/teams/issues"
+            },
+            "time": "2026-06-12T15:03:38+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1795,26 +1866,26 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.12.1",
+            "version": "7.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "d34627490fbc03bf5c5d7cfed81f2faa19519425"
+                "reference": "9aa17bcdd777ee31df9fc83c337ca4ca2340def3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d34627490fbc03bf5c5d7cfed81f2faa19519425",
-                "reference": "d34627490fbc03bf5c5d7cfed81f2faa19519425",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9aa17bcdd777ee31df9fc83c337ca4ca2340def3",
+                "reference": "9aa17bcdd777ee31df9fc83c337ca4ca2340def3",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/promises": "^2.5",
-                "guzzlehttp/psr7": "^2.12.1",
+                "guzzlehttp/psr7": "^2.12.3",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.5 || ^3.0",
-                "symfony/polyfill-php80": "^1.24"
+                "symfony/polyfill-php80": "^1.25"
             },
             "provide": {
                 "psr/http-client-implementation": "1.0"
@@ -1903,7 +1974,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.12.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.12.3"
             },
             "funding": [
                 {
@@ -1919,7 +1990,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-18T14:12:49+00:00"
+            "time": "2026-06-23T15:29:02+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -2007,16 +2078,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.12.1",
+            "version": "2.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "172ef2f4e9824c1e058b7f30be8ae25a02c0f2b7"
+                "reference": "7ec62dc3f44aa218487dbed81a9bf9bc647be55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/172ef2f4e9824c1e058b7f30be8ae25a02c0f2b7",
-                "reference": "172ef2f4e9824c1e058b7f30be8ae25a02c0f2b7",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/7ec62dc3f44aa218487dbed81a9bf9bc647be55d",
+                "reference": "7ec62dc3f44aa218487dbed81a9bf9bc647be55d",
                 "shasum": ""
             },
             "require": {
@@ -2025,7 +2096,7 @@
                 "psr/http-message": "^1.1 || ^2.0",
                 "ralouphie/getallheaders": "^3.0",
                 "symfony/deprecation-contracts": "^2.5 || ^3.0",
-                "symfony/polyfill-php80": "^1.24"
+                "symfony/polyfill-php80": "^1.25"
             },
             "provide": {
                 "psr/http-factory-implementation": "1.0",
@@ -2106,7 +2177,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.12.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.12.3"
             },
             "funding": [
                 {
@@ -2122,25 +2193,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-18T09:49:37+00:00"
+            "time": "2026-06-23T15:21:08+00:00"
         },
         {
             "name": "guzzlehttp/uri-template",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "7fe811c23a9e3cd712b4389eaeb50b5456d8c529"
+                "reference": "9c19128923b05a5d7355e5d2318d7808b7e33bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/7fe811c23a9e3cd712b4389eaeb50b5456d8c529",
-                "reference": "7fe811c23a9e3cd712b4389eaeb50b5456d8c529",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/9c19128923b05a5d7355e5d2318d7808b7e33bbd",
+                "reference": "9c19128923b05a5d7355e5d2318d7808b7e33bbd",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "symfony/polyfill-php80": "^1.24"
+                "symfony/polyfill-php80": "^1.25"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
@@ -2192,7 +2263,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-                "source": "https://github.com/guzzle/uri-template/tree/v1.0.7"
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.8"
             },
             "funding": [
                 {
@@ -2208,20 +2279,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-12T21:33:43+00:00"
+            "time": "2026-06-23T13:02:23+00:00"
         },
         {
             "name": "laravel/folio",
-            "version": "v1.1.18",
+            "version": "v1.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/folio.git",
-                "reference": "bfcd17c3e2966a6f5bb694e97b7ff5a3ca920de8"
+                "reference": "3878a6620df31d813d4ad8a27a32627360266e24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/folio/zipball/bfcd17c3e2966a6f5bb694e97b7ff5a3ca920de8",
-                "reference": "bfcd17c3e2966a6f5bb694e97b7ff5a3ca920de8",
+                "url": "https://api.github.com/repos/laravel/folio/zipball/3878a6620df31d813d4ad8a27a32627360266e24",
+                "reference": "3878a6620df31d813d4ad8a27a32627360266e24",
                 "shasum": ""
             },
             "require": {
@@ -2281,24 +2352,24 @@
                 "issues": "https://github.com/laravel/folio/issues",
                 "source": "https://github.com/laravel/folio"
             },
-            "time": "2026-04-27T18:12:00+00:00"
+            "time": "2026-06-23T18:26:31+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "6135650d69bd9442e470bb1b343422081b076f1e"
+                "reference": "0802b7a81f3252d78200b8037ac183a686a529f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6135650d69bd9442e470bb1b343422081b076f1e",
-                "reference": "6135650d69bd9442e470bb1b343422081b076f1e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0802b7a81f3252d78200b8037ac183a686a529f0",
+                "reference": "0802b7a81f3252d78200b8037ac183a686a529f0",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.14.2 || ^0.15 || ^0.16 || ^0.17",
+                "brick/math": "^0.14.2 || ^0.15 || ^0.16 || ^0.17 || ^0.18",
                 "composer-runtime-api": "^2.2",
                 "doctrine/inflector": "^2.0.5",
                 "dragonmantank/cron-expression": "^3.4",
@@ -2505,20 +2576,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-06-16T16:07:50+00:00"
+            "time": "2026-06-23T19:42:45+00:00"
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.3.18",
+            "version": "v0.3.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "a19af51bb144bf87f08397921fa619f85c7d4e72"
+                "reference": "6d53c826dfd33ec5f4ac91f816ff327727c7988b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/a19af51bb144bf87f08397921fa619f85c7d4e72",
-                "reference": "a19af51bb144bf87f08397921fa619f85c7d4e72",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/6d53c826dfd33ec5f4ac91f816ff327727c7988b",
+                "reference": "6d53c826dfd33ec5f4ac91f816ff327727c7988b",
                 "shasum": ""
             },
             "require": {
@@ -2562,9 +2633,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.3.18"
+                "source": "https://github.com/laravel/prompts/tree/v0.3.20"
             },
-            "time": "2026-05-19T00:47:18+00:00"
+            "time": "2026-06-24T19:16:38+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2959,16 +3030,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.34.0",
+            "version": "3.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "2daaac3b0d4c83ea7ed5d8586e786f5d00f3540e"
+                "reference": "d0a405f03d980461e4b6e08cfed2c162650f9f6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2daaac3b0d4c83ea7ed5d8586e786f5d00f3540e",
-                "reference": "2daaac3b0d4c83ea7ed5d8586e786f5d00f3540e",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/d0a405f03d980461e4b6e08cfed2c162650f9f6b",
+                "reference": "d0a405f03d980461e4b6e08cfed2c162650f9f6b",
                 "shasum": ""
             },
             "require": {
@@ -3036,9 +3107,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.34.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.35.0"
             },
-            "time": "2026-05-14T10:28:08+00:00"
+            "time": "2026-06-22T20:12:06+00:00"
         },
         {
             "name": "league/flysystem-local",
@@ -8880,16 +8951,16 @@
         },
         {
             "name": "laravel/pao",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pao.git",
-                "reference": "8f6c8094d701a03041c85ba583ca233398c792ec"
+                "reference": "41b3c61ebeddce52a446afe6d21e0b02983fb2f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pao/zipball/8f6c8094d701a03041c85ba583ca233398c792ec",
-                "reference": "8f6c8094d701a03041c85ba583ca233398c792ec",
+                "url": "https://api.github.com/repos/laravel/pao/zipball/41b3c61ebeddce52a446afe6d21e0b02983fb2f6",
+                "reference": "41b3c61ebeddce52a446afe6d21e0b02983fb2f6",
                 "shasum": ""
             },
             "require": {
@@ -8961,7 +9032,7 @@
                 "issues": "https://github.com/laravel/pao/issues",
                 "source": "https://github.com/laravel/pao"
             },
-            "time": "2026-06-12T08:00:22+00:00"
+            "time": "2026-06-22T19:58:00+00:00"
         },
         {
             "name": "laravel/pint",
@@ -9094,16 +9165,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.62.0",
+            "version": "v1.63.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "3aaeefc979f8ba6586fbc5b6e0b1b3638058f98e"
+                "reference": "51bbce3f803c1d386cabbb44e618c955a12ff5fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/3aaeefc979f8ba6586fbc5b6e0b1b3638058f98e",
-                "reference": "3aaeefc979f8ba6586fbc5b6e0b1b3638058f98e",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/51bbce3f803c1d386cabbb44e618c955a12ff5fc",
+                "reference": "51bbce3f803c1d386cabbb44e618c955a12ff5fc",
                 "shasum": ""
             },
             "require": {
@@ -9153,7 +9224,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2026-05-27T04:02:01+00:00"
+            "time": "2026-06-18T08:54:14+00:00"
         },
         {
             "name": "mockery/mockery",
