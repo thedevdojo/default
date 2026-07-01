@@ -10,40 +10,11 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/foundation"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/accounts"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/auth"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/billing"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/blog"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/changelog"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/components"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/notifications"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/thedevdojo/teams"
+            "type": "path",
+            "url": "packages/devdojo/*",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require": {
@@ -51,7 +22,8 @@
         "laravel/framework": "^13.7",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^4.1",
-        "devdojo/foundation": "*"
+        "devdojo/foundation": "*",
+        "devdojo/database": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
