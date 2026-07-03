@@ -2,10 +2,12 @@
 
 use App\Models\User;
 
-test('the home page renders the hero', function () {
+test('the home page welcomes the developer', function () {
     $this->get('/')
         ->assertOk()
-        ->assertSee('Build something great, even faster.');
+        ->assertSee('Welcome to your new')
+        ->assertSee('Start building')
+        ->assertSee(config('platform.builder_url'));
 });
 
 test('the dashboard redirects guests to login', function () {

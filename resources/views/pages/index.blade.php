@@ -6,157 +6,241 @@ name('home');
 
 ?>
 
-<x-layouts.marketing :title="config('app.name').' — Build something great'">
-    <section id="top" class="relative overflow-hidden pt-36 pb-24 sm:pt-44 sm:pb-32">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    @include('partials.head', ['title' => 'Welcome — '.config('app.name')])
 
-        <div class="mx-auto max-w-6xl px-6">
-            {{-- Eyebrow pill --}}
-            <x-badge variant="outline" size="lg" pill class="gap-2 bg-secondary py-1 pr-3.5 pl-1.5 font-normal text-foreground">
-                <span class="inline-flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                    <svg class="size-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 3L4 14h7l-1 7 9-11h-7l1-7z" />
-                    </svg>
-                </span>
-                Your next project starts here
-            </x-badge>
+    <style>
+        /* Swap standalone chrome for builder-friendly hints when rendered
+           inside the builder canvas (html.is-embedded is set pre-paint). */
+        .embedded-only { display: none; }
+        html.is-embedded .standalone-only { display: none; }
+        html.is-embedded .embedded-only { display: inline-flex; }
 
-            <h1 class="mt-7 max-w-5xl text-4xl leading-[1.07] font-medium tracking-tight text-balance text-neutral-900 sm:text-5xl lg:text-6xl dark:text-white">
-                Build something great, even faster.
-            </h1>
+        @keyframes welcome-rise {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-            <p class="mt-6 max-w-[800px] text-lg text-pretty text-neutral-600 dark:text-neutral-400">
-                A clean, modern starting point for whatever you're building. Create a web app, SaaS,
-                internal tool, or your next side project even faster. Plug'n play authentication, billing, accounts and more.
-            </p>
+        .welcome-rise { animation: welcome-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-            <div class="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                @guest
-                    <x-button type="a" :href="route('register')" size="xl" class="font-semibold">
-                        Get started
-                        <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" /></svg>
-                    </x-button>
-                    <x-button type="a" variant="outline" :href="route('login')" size="xl" class="font-semibold shadow-sm">
-                        Sign in
-                    </x-button>
-                @else
-                    <x-button type="a" :href="route('dashboard')" size="xl" class="font-semibold">
-                        Go to dashboard
-                        <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" /></svg>
-                    </x-button>
-                @endguest
-            </div>
+        @media (prefers-reduced-motion: reduce) {
+            .welcome-rise { animation: none; }
+        }
+    </style>
+</head>
+<body class="min-h-dvh overflow-x-hidden bg-white font-sans text-neutral-700 antialiased selection:bg-neutral-900/10 dark:bg-[#080808] dark:text-neutral-300 dark:selection:bg-white/20">
+
+    {{-- Ambient background: faded dot grid + soft brand glow --}}
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0">
+        <div class="absolute inset-0 bg-[radial-gradient(circle,#000_1px,transparent_1px)] opacity-[0.05] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_65%_65%_at_50%_38%,black,transparent)] dark:bg-[radial-gradient(circle,#fff_1px,transparent_1px)] dark:opacity-[0.08]"></div>
+        <div class="absolute top-[-22%] left-1/2 h-[34rem] w-[56rem] max-w-none -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(124,58,237,0.09),transparent)] blur-2xl dark:bg-[radial-gradient(closest-side,rgba(124,58,237,0.15),transparent)]"></div>
+    </div>
+
+    <canvas id="confetti-canvas" aria-hidden="true" class="pointer-events-none fixed inset-0 z-50 h-full w-full"></canvas>
+
+    <x-theme-toggle class="standalone-only fixed top-5 right-5 z-40 bg-white/70 backdrop-blur dark:bg-white/[0.03]" />
+
+    <main class="relative z-10 flex min-h-dvh flex-col items-center justify-center px-6 py-24 text-center">
+
+        {{-- Logo tile (click it — the confetti fires again) --}}
+        <button type="button" id="logo-tile" aria-label="Celebrate again" class="welcome-rise group flex size-12 cursor-pointer items-center justify-center transition-transform duration-300 ease-out hover:scale-105 active:scale-95">
+            <x-logo-icon class="h-7 text-neutral-900 transition-transform duration-500 ease-out group-hover:rotate-12 dark:text-white" />
+        </button>
+
+        {{-- Live status pill --}}
+        <div class="welcome-rise mt-8 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 py-1 pr-3.5 pl-2.5 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]" style="animation-delay: 60ms">
+            <span class="relative flex size-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60"></span>
+                <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+            </span>
+            <span class="font-mono text-xs text-neutral-600 dark:text-neutral-400">{{ request()->getHost() }}</span>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500">is live</span>
         </div>
 
-        {{-- Product mockup (gray placeholder stands in for the dashboard screenshot) --}}
-        <div class="relative mx-auto mt-16 max-w-6xl px-6">
-            <div class="pointer-events-none absolute inset-x-10 -top-6 bottom-10 -z-10 rounded-[2rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(124,58,237,0.12),transparent_70%)] blur-2xl dark:bg-[radial-gradient(60%_50%_at_50%_0%,rgba(124,58,237,0.18),transparent_70%)]"></div>
+        <h1 class="welcome-rise mt-6 max-w-2xl text-4xl leading-[1.08] font-medium tracking-tight text-balance text-neutral-900 sm:text-5xl dark:text-white" style="animation-delay: 120ms">
+            Welcome to your new&nbsp;app.
+        </h1>
 
-            <div class="rounded-3xl bg-black/5 p-2 ring-1 ring-gray-900/10 backdrop-blur-2xl dark:bg-white/10 dark:ring-white/10">
-                <div class="overflow-hidden rounded-2xl bg-neutral-50 shadow-2xl shadow-neutral-400/20 dark:bg-[#0a0b0f] dark:shadow-[0_40px_120px_-30px_rgba(80,70,140,0.5)]">
-                    <div class="aspect-[16/11] w-full bg-neutral-200 dark:bg-white/5"></div>
-                </div>
-            </div>
+        <p class="welcome-rise mt-5 max-w-xl text-lg text-pretty text-neutral-600 dark:text-neutral-400" style="animation-delay: 180ms">
+            The foundation is done — authentication, billing, profiles, and notifications are
+            wired and waiting. Now for the part only you can build.
+        </p>
+
+        {{-- Standalone: send them to the builder. Embedded: they're already there. --}}
+        <div class="standalone-only welcome-rise mt-9 flex flex-col items-center gap-3 sm:flex-row" style="animation-delay: 240ms">
+            <x-button type="a" href="{{ config('platform.builder_url') }}" size="xl" class="group font-semibold shadow-[0_8px_24px_-8px_rgba(0,0,0,0.4)] dark:shadow-[0_8px_24px_-8px_rgba(255,255,255,0.25)]">
+                Start building
+                <svg class="size-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" /></svg>
+            </x-button>
+            <x-button type="a" :href="route('dashboard')" variant="outline" size="xl" class="font-semibold shadow-sm">
+                Open dashboard
+            </x-button>
         </div>
 
-        {{-- Feature cards --}}
-        @php
-            $features = [
-                ['Plug & play auth', 'Login, social & 2FA built in', '<svg class="size-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path stroke-linecap="round" d="M8 11V8a4 4 0 018 0"/></svg>'],
-                ['Billing ready', 'Subscriptions & checkout', '<svg class="size-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path stroke-linecap="round" d="M3 10h18"/></svg>'],
-                ['Fully yours', 'Own your code and data', '<svg class="size-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 4.5-3.2 7.3-8 9-4.8-1.7-8-4.5-8-9V7l8-4z"/></svg>'],
-                ['Ship faster', 'Skip the boilerplate setup', '<svg class="size-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 3L4 14h7l-1 7 9-11h-7l1-7z"/></svg>'],
-            ];
-        @endphp
+        <p class="standalone-only welcome-rise mt-5 text-xs text-neutral-400 dark:text-neutral-500" style="animation-delay: 300ms">
+            or press
+            <kbd class="mx-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-1 font-mono text-[11px] font-medium text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-neutral-400">B</kbd>
+            to open the builder
+        </p>
 
-        <div class="mx-auto mt-6 max-w-6xl px-6">
-            <div class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-200 shadow-sm sm:grid-cols-2 lg:grid-cols-4 dark:border-white/10 dark:bg-white/10 dark:shadow-none">
-                @foreach ($features as [$title, $sub, $icon])
-                    <div class="flex items-start gap-3 bg-white p-5 dark:bg-[#0a0a0a]">
-                        <span class="mt-0.5 text-neutral-600 dark:text-neutral-400">{!! $icon !!}</span>
-                        <div>
-                            <p class="text-sm font-medium text-neutral-900 dark:text-white">{{ $title }}</p>
-                            <p class="mt-0.5 text-xs text-neutral-500 dark:text-neutral-400">{{ $sub }}</p>
-                        </div>
-                    </div>
+        <div class="embedded-only welcome-rise mt-9 items-center gap-2.5 rounded-full border border-violet-200 bg-violet-50 py-2 pr-4 pl-3 dark:border-violet-500/20 dark:bg-violet-500/10" style="animation-delay: 240ms">
+            <svg class="size-4 text-violet-500 dark:text-violet-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>
+            <span class="text-sm text-violet-700 dark:text-violet-300">You're in the builder — describe your idea in the chat to start shaping this app.</span>
+        </div>
+
+        {{-- What's already on --}}
+        <div class="welcome-rise mt-16" style="animation-delay: 360ms">
+            <p class="text-[11px] font-semibold tracking-[0.14em] text-neutral-400 uppercase dark:text-neutral-500">Included &amp; ready</p>
+            <ul class="mt-4 flex max-w-lg flex-wrap items-center justify-center gap-2">
+                @foreach (['Authentication', 'Billing', 'Profiles', 'Notifications', 'Blog', 'Changelog'] as $feature)
+                    <li class="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-neutral-400">
+                        <svg class="size-3 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        {{ $feature }}
+                    </li>
                 @endforeach
-            </div>
+            </ul>
         </div>
-    </section>
+    </main>
 
-    {{-- Features --}}
-    <section id="features" class="scroll-mt-24 border-t border-neutral-200/70 py-24 sm:py-28 dark:border-white/[0.06]">
-        <div class="mx-auto max-w-6xl px-6">
-            <div class="max-w-2xl">
-                <span class="text-xs font-semibold tracking-wider text-neutral-500 uppercase dark:text-neutral-400">Features</span>
-                <h2 class="mt-3 text-3xl font-medium tracking-tight text-balance text-neutral-900 sm:text-4xl dark:text-white">
-                    Everything you need to ship.
-                </h2>
-                <p class="mt-4 text-lg text-pretty text-neutral-600 dark:text-neutral-400">
-                    Skip the boilerplate. The essentials are built in and wired together, so you can focus on the parts
-                    that make your product yours.
-                </p>
-            </div>
+    <footer class="standalone-only fixed inset-x-0 bottom-6 z-10 justify-center">
+        <p class="text-center text-xs text-neutral-400 dark:text-neutral-600">Built on the DevDojo Platform</p>
+    </footer>
 
-            @php
-                $featureCards = [
-                    ['Authentication', 'Login, registration, social sign-in, and two-factor — secure and ready on day one.', '<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 0h10.5a2.25 2.25 0 012.25 2.25v6.75a2.25 2.25 0 01-2.25 2.25H6.75a2.25 2.25 0 01-2.25-2.25v-6.75a2.25 2.25 0 012.25-2.25z" />'],
-                    ['Billing & plans', 'Subscriptions, checkout, and feature limits with Stripe or Paddle out of the box.', '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9V6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0119.5 19.5h-15A2.25 2.25 0 012.25 17.25V9z" />'],
-                    ['Profiles', 'Public user profiles with dynamic fields, social links, and privacy controls.', '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 19.5a7.5 7.5 0 0115 0v.75H4.5v-.75z" />'],
-                    ['Notifications', 'In-app notifications and per-user preferences your users can fine-tune.', '<path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.8 23.8 0 005.454-1.31A8.97 8.97 0 0118 9.75V9A6 6 0 006 9v.75a8.97 8.97 0 01-2.312 6.022 23.8 23.8 0 005.455 1.31m6.714 0a3 3 0 11-6.714 0m6.714 0a24.2 24.2 0 01-6.714 0" />'],
-                    ['Content & blog', 'A built-in blog and changelog with an admin to keep users in the loop.', '<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />'],
-                    ['Yours to extend', 'A thin, conventional Laravel app underneath — add features the way you already know.', '<path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />'],
-                ];
-            @endphp
+    <script>
+        (function () {
+            /* ------------------------------------------------------------------
+             * Confetti — a small, dependency-free canvas celebration.
+             * Fires once when the page settles; the logo tile replays it.
+             * ------------------------------------------------------------------ */
+            var canvas = document.getElementById('confetti-canvas');
+            var context = canvas.getContext('2d');
+            var particles = [];
+            var animationFrame = null;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach ($featureCards as [$title, $desc, $icon])
-                    <div class="rounded-2xl border border-neutral-200 bg-white p-6 transition-colors hover:border-neutral-300 dark:border-white/10 dark:bg-white/[0.02] dark:hover:border-white/20">
-                        <span class="inline-flex size-10 items-center justify-center rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                            <svg class="size-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" aria-hidden="true">{!! $icon !!}</svg>
-                        </span>
-                        <h3 class="mt-5 text-base font-semibold text-neutral-900 dark:text-white">{{ $title }}</h3>
-                        <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{{ $desc }}</p>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+            function sizeCanvas() {
+                var ratio = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = window.innerWidth * ratio;
+                canvas.height = window.innerHeight * ratio;
+                context.setTransform(ratio, 0, 0, ratio, 0, 0);
+            }
 
-    {{-- About --}}
-    <section id="about" class="scroll-mt-24 border-t border-neutral-200/70 py-24 sm:py-28 dark:border-white/[0.06]">
-        <div class="mx-auto max-w-6xl px-6">
-            <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
-                <div>
-                    <span class="text-xs font-semibold tracking-wider text-neutral-500 uppercase dark:text-neutral-400">About</span>
-                    <h2 class="mt-3 text-3xl font-medium tracking-tight text-balance text-neutral-900 sm:text-4xl dark:text-white">
-                        A foundation you can build on.
-                    </h2>
-                    <div class="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                        @guest
-                            <x-button type="a" :href="route('register')" size="xl" class="font-semibold">
-                                Get started
-                                <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" /></svg>
-                            </x-button>
-                        @else
-                            <x-button type="a" :href="route('dashboard')" size="xl" class="font-semibold">
-                                Go to dashboard
-                                <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" /></svg>
-                            </x-button>
-                        @endguest
-                    </div>
-                </div>
+            function palette() {
+                var dark = document.documentElement.classList.contains('dark');
 
-                <div class="space-y-5 text-lg text-pretty text-neutral-600 dark:text-neutral-400">
-                    <p>
-                        This is a starting point, not a straitjacket. Every piece is here to get you moving —
-                        authentication, billing, profiles, and more — wired together and ready the moment you start.
-                    </p>
-                    <p>
-                        From here, it's yours. Add your own features, ship your idea, and let the foundation handle the
-                        parts every app needs so you don't have to build them again.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-</x-layouts.marketing>
+                return ['#7c3aed', '#0ea5e9', '#10b981', '#f59e0b', '#f43f5e', dark ? '#fafafa' : '#171717'];
+            }
+
+            function burst(originX, originY, angle, spread, count, power) {
+                var colors = palette();
+
+                for (var i = 0; i < count; i++) {
+                    var direction = (angle + (Math.random() - 0.5) * spread) * (Math.PI / 180);
+                    var velocity = power * (0.5 + Math.random() * 0.75);
+
+                    particles.push({
+                        x: originX,
+                        y: originY,
+                        vx: Math.cos(direction) * velocity,
+                        vy: -Math.sin(direction) * velocity,
+                        width: 5 + Math.random() * 5,
+                        height: 8 + Math.random() * 6,
+                        color: colors[(Math.random() * colors.length) | 0],
+                        rotation: Math.random() * Math.PI,
+                        spin: (Math.random() - 0.5) * 0.3,
+                        wobble: Math.random() * Math.PI * 2,
+                        life: 0,
+                        maxLife: 110 + Math.random() * 60,
+                        round: Math.random() < 0.25,
+                    });
+                }
+
+                if (! animationFrame) {
+                    animationFrame = requestAnimationFrame(tick);
+                }
+            }
+
+            function tick() {
+                context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+                particles = particles.filter(function (p) {
+                    p.life++;
+                    p.vy += 0.32;
+                    p.vx *= 0.985;
+                    p.vy *= 0.985;
+                    p.x += p.vx + Math.sin(p.wobble += 0.08);
+                    p.y += p.vy;
+                    p.rotation += p.spin;
+
+                    if (p.life > p.maxLife || p.y > window.innerHeight + 40) {
+                        return false;
+                    }
+
+                    var fade = p.life > p.maxLife * 0.65
+                        ? 1 - (p.life - p.maxLife * 0.65) / (p.maxLife * 0.35)
+                        : 1;
+
+                    context.save();
+                    context.globalAlpha = Math.max(fade, 0);
+                    context.translate(p.x, p.y);
+                    context.rotate(p.rotation);
+                    context.fillStyle = p.color;
+
+                    if (p.round) {
+                        context.beginPath();
+                        context.arc(0, 0, p.width / 2, 0, Math.PI * 2);
+                        context.fill();
+                    } else {
+                        context.fillRect(-p.width / 2, -p.height / 2, p.width, p.height * Math.abs(Math.cos(p.wobble)));
+                    }
+
+                    context.restore();
+
+                    return true;
+                });
+
+                animationFrame = particles.length ? requestAnimationFrame(tick) : null;
+            }
+
+            function celebrate() {
+                if (reducedMotion) {
+                    return;
+                }
+
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+
+                burst(w * 0.08, h * 0.92, 62, 55, 90, 19);
+                burst(w * 0.92, h * 0.92, 118, 55, 90, 19);
+                setTimeout(function () { burst(w * 0.5, h * 0.62, 90, 100, 70, 14); }, 180);
+            }
+
+            sizeCanvas();
+            window.addEventListener('resize', sizeCanvas);
+            window.setTimeout(celebrate, 400);
+            document.getElementById('logo-tile').addEventListener('click', celebrate);
+
+            /* Press B (standalone only) to jump into the builder. */
+            var embedded = document.documentElement.classList.contains('is-embedded');
+
+            document.addEventListener('keydown', function (event) {
+                if (embedded || event.metaKey || event.ctrlKey || event.altKey) {
+                    return;
+                }
+
+                var target = event.target;
+
+                if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+                    return;
+                }
+
+                if (event.key === 'b' || event.key === 'B') {
+                    window.location.href = @js(config('platform.builder_url'));
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
