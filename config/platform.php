@@ -17,6 +17,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Platform Runtime
+    |--------------------------------------------------------------------------
+    |
+    | True when this app is running inside the DevDojo platform's browser
+    | runtime (set in the .env the workspace builder writes). The head swaps
+    | the precompiled Vite CSS for the Tailwind browser compiler so classes
+    | and design tokens the AI writes style instantly — no build step. Code
+    | published and deployed elsewhere never sets this, so production keeps
+    | the fast prebuilt assets.
+    |
+    */
+
+    'runtime' => (bool) env('PLATFORM_RUNTIME', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Frame Ancestors
     |--------------------------------------------------------------------------
     |

@@ -4,6 +4,7 @@
 
 @source '../../packages/devdojo/components/resources';
 @source '../../packages/devdojo/foundation/resources';
+@source '../../packages/devdojo/database/src';
 @import './components.css';
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

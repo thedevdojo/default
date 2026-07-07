@@ -81,6 +81,7 @@ name('home');
             var context = canvas.getContext('2d');
             var particles = [];
             var animationFrame = null;
+            var lastFrameAt = null;
             var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             function sizeCanvas() {
@@ -123,17 +124,26 @@ name('home');
                 }
             }
 
-            function tick() {
+            function tick(now) {
+                /* Physics are tuned as per-frame steps at 60fps. Scale each step
+                   by real elapsed time so a busy main thread (the WASM runtime
+                   booting, say) drops the frame rate — not the confetti's speed. */
+                if (lastFrameAt === null) {
+                    lastFrameAt = now;
+                }
+                var dt = Math.min((now - lastFrameAt) / (1000 / 60), 4);
+                lastFrameAt = now;
+
                 context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
                 particles = particles.filter(function (p) {
-                    p.life++;
-                    p.vy += 0.32;
-                    p.vx *= 0.985;
-                    p.vy *= 0.985;
-                    p.x += p.vx + Math.sin(p.wobble += 0.08);
-                    p.y += p.vy;
-                    p.rotation += p.spin;
+                    p.life += dt;
+                    p.vy += 0.32 * dt;
+                    p.vx *= Math.pow(0.985, dt);
+                    p.vy *= Math.pow(0.985, dt);
+                    p.x += (p.vx + Math.sin(p.wobble += 0.08 * dt)) * dt;
+                    p.y += p.vy * dt;
+                    p.rotation += p.spin * dt;
 
                     if (p.life > p.maxLife || p.y > window.innerHeight + 40) {
                         return false;
@@ -163,6 +173,10 @@ name('home');
                 });
 
                 animationFrame = particles.length ? requestAnimationFrame(tick) : null;
+
+                if (! animationFrame) {
+                    lastFrameAt = null;
+                }
             }
 
             function celebrate() {

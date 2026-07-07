@@ -11,7 +11,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "packages/devdojo/*",
+            "url": "../platform-packages/*",
             "options": {
                 "symlink": true
             }

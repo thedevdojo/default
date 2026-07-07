@@ -31,6 +31,18 @@
 
         {{-- Right cluster --}}
         <div class="ml-auto flex items-center gap-2">
+            {{-- Database browser --}}
+            <a href="{{ route('database') }}"
+               class="flex items-center gap-2 rounded-medium border border-neutral-200/90 bg-white py-1.5 pr-2.5 pl-2 text-sm font-medium text-neutral-700 shadow-xs transition-colors hover:bg-neutral-50 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
+               aria-label="Database">
+                <svg class="size-4 text-neutral-500 dark:text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <ellipse cx="12" cy="5" rx="8" ry="3" />
+                    <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
+                    <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+                </svg>
+                <span class="max-sm:hidden">Database</span>
+            </a>
+
             {{-- Avatar + menu --}}
             <x-dropdown align="right" gap="2">
                 <x-slot:trigger>

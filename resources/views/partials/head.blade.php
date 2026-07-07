@@ -34,4 +34,15 @@
     })();
 </script>
 
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@if (config('platform.runtime'))
+    {{-- Inside the platform's browser runtime, Tailwind compiles in the
+         browser from the live resources/css/app.css — so classes and design
+         tokens the AI writes style instantly, with no asset build. The JS
+         bundle stays on Vite: it carries the builder bridge, and Livewire
+         ships its own Alpine (a CDN copy would double-register it). --}}
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    {!! App\Support\PlatformRuntimeCss::styleTags() !!}
+    @vite(['resources/js/app.js'])
+@else
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endif
